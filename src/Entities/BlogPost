@@ -1,0 +1,39 @@
+{
+  "name": "BlogPost",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Blog post title"
+    },
+    "content": {
+      "type": "string",
+      "description": "Blog post content in markdown"
+    },
+    "excerpt": {
+      "type": "string",
+      "description": "Short excerpt or summary"
+    },
+    "featured_image": {
+      "type": "string",
+      "description": "Featured image URL"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Blog post tags"
+    },
+    "published": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the post is published"
+    }
+  },
+  "required": [
+    "title",
+    "content",
+    "excerpt"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "name": "Project",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Project title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Project description"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "course",
+        "thesis",
+        "personal",
+        "research"
+      ],
+      "description": "Project type"
+    },
+    "technologies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Technologies used"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Project images"
+    },
+    "github_url": {
+      "type": "string",
+      "description": "GitHub repository URL"
+    },
+    "demo_url": {
+      "type": "string",
+      "description": "Live demo URL"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "in-progress",
+        "planned"
+      ],
+      "default": "completed",
+      "description": "Project status"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Project start date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Project end date"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "type"
+  ]
+}

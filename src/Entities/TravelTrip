@@ -1,0 +1,58 @@
+{
+  "name": "TravelTrip",
+  "type": "object",
+  "properties": {
+    "location": {
+      "type": "string",
+      "description": "Travel destination name"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country visited"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "Location latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "description": "Location longitude"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Trip start date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Trip end date"
+    },
+    "description": {
+      "type": "string",
+      "description": "Trip description"
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of photo URLs"
+    },
+    "highlights": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Trip highlights"
+    }
+  },
+  "required": [
+    "location",
+    "country",
+    "latitude",
+    "longitude",
+    "start_date",
+    "description"
+  ]
+}

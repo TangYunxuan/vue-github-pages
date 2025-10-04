@@ -1,0 +1,23 @@
+{
+  "name": "CatPhoto",
+  "type": "object",
+  "properties": {
+    "image_url": {
+      "type": "string",
+      "description": "URL of the cat photo"
+    },
+    "caption": {
+      "type": "string",
+      "description": "Caption for the photo"
+    },
+    "likes": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of likes"
+    }
+  },
+  "required": [
+    "image_url",
+    "caption"
+  ]
+}
