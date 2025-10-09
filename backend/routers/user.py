@@ -1,33 +1,29 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from models.user import User
-from schemas.user import UserCreate, UserOut
-from database import SessionLocal
+from crud import user
+from schemas import UserCreate, UserUpdate
+from database import get_db
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter(prefix="/api/users", tags=["Users"])
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+@router.get("/")
+def get_all(db: Session = Depends(get_db)):
+    return user.list_users(db)
 
-@router.post("/", response_model=UserOut)
-def create_item(item: UserCreate, db: Session = Depends(get_db)):
-    db_item = User(**item.dict())
-    db.add(db_item)
-    db.commit()
-    db.refresh(db_item)
-    return db_item
+@router.get("/{item_id}")
+def get_one(item_id: int, db: Session = Depends(get_db)):
+    result = user.get_user(db, item_id)
+    if not result: raise HTTPException(status_code=404, detail="Not found")
+    return result
 
-@router.get("/", response_model=list[UserOut])
-def get_items(db: Session = Depends(get_db)):
-    return db.query(User).all()
+@router.post("/")
+def create(item: UserCreate, db: Session = Depends(get_db)):
+    return user.create_user(db, item)
 
-@router.get("/{item_id}", response_model=UserOut)
-def get_item(item_id: int, db: Session = Depends(get_db)):
-    item = db.query(User).filter(User.id == item_id).first()
-    if not item:
-        raise HTTPException(status_code=404, detail="User not found")
-    return item
+@router.put("/{item_id}")
+def update(item_id: int, item: UserUpdate, db: Session = Depends(get_db)):
+    return user.update_user(db, item_id, item)
+
+@router.delete("/{item_id}")
+def delete(item_id: int, db: Session = Depends(get_db)):
+    return user.delete_user(db, item_id)

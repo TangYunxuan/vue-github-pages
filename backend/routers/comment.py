@@ -1,33 +1,29 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from models.comment import Comment
-from schemas.comment import CommentCreate, CommentOut
-from database import SessionLocal
+from crud import comment
+from schemas import CommentCreate, CommentUpdate
+from database import get_db
 
-router = APIRouter(prefix="/comments", tags=["Comments"])
+router = APIRouter(prefix="/api/comments", tags=["Comments"])
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+@router.get("/")
+def get_all(db: Session = Depends(get_db)):
+    return comment.list_comments(db)
 
-@router.post("/", response_model=CommentOut)
-def create_item(item: CommentCreate, db: Session = Depends(get_db)):
-    db_item = Comment(**item.dict())
-    db.add(db_item)
-    db.commit()
-    db.refresh(db_item)
-    return db_item
+@router.get("/{item_id}")
+def get_one(item_id: int, db: Session = Depends(get_db)):
+    result = comment.get_comment(db, item_id)
+    if not result: raise HTTPException(status_code=404, detail="Not found")
+    return result
 
-@router.get("/", response_model=list[CommentOut])
-def get_items(db: Session = Depends(get_db)):
-    return db.query(Comment).all()
+@router.post("/")
+def create(item: CommentCreate, db: Session = Depends(get_db)):
+    return comment.create_comment(db, item)
 
-@router.get("/{item_id}", response_model=CommentOut)
-def get_item(item_id: int, db: Session = Depends(get_db)):
-    item = db.query(Comment).filter(Comment.id == item_id).first()
-    if not item:
-        raise HTTPException(status_code=404, detail="Comment not found")
-    return item
+@router.put("/{item_id}")
+def update(item_id: int, item: CommentUpdate, db: Session = Depends(get_db)):
+    return comment.update_comment(db, item_id, item)
+
+@router.delete("/{item_id}")
+def delete(item_id: int, db: Session = Depends(get_db)):
+    return comment.delete_comment(db, item_id)

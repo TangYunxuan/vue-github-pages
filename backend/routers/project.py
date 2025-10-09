@@ -1,33 +1,29 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from models.project import Project
-from schemas.project import ProjectCreate, ProjectOut
-from database import SessionLocal
+from crud import project
+from schemas import ProjectCreate, ProjectUpdate
+from database import get_db
 
-router = APIRouter(prefix="/projects", tags=["Projects"])
+router = APIRouter(prefix="/api/projects", tags=["Projects"])
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+@router.get("/")
+def get_all(db: Session = Depends(get_db)):
+    return project.list_projects(db)
 
-@router.post("/", response_model=ProjectOut)
-def create_item(item: ProjectCreate, db: Session = Depends(get_db)):
-    db_item = Project(**item.dict())
-    db.add(db_item)
-    db.commit()
-    db.refresh(db_item)
-    return db_item
+@router.get("/{item_id}")
+def get_one(item_id: int, db: Session = Depends(get_db)):
+    result = project.get_project(db, item_id)
+    if not result: raise HTTPException(status_code=404, detail="Not found")
+    return result
 
-@router.get("/", response_model=list[ProjectOut])
-def get_items(db: Session = Depends(get_db)):
-    return db.query(Project).all()
+@router.post("/")
+def create(item: ProjectCreate, db: Session = Depends(get_db)):
+    return project.create_project(db, item)
 
-@router.get("/{item_id}", response_model=ProjectOut)
-def get_item(item_id: int, db: Session = Depends(get_db)):
-    item = db.query(Project).filter(Project.id == item_id).first()
-    if not item:
-        raise HTTPException(status_code=404, detail="Project not found")
-    return item
+@router.put("/{item_id}")
+def update(item_id: int, item: ProjectUpdate, db: Session = Depends(get_db)):
+    return project.update_project(db, item_id, item)
+
+@router.delete("/{item_id}")
+def delete(item_id: int, db: Session = Depends(get_db)):
+    return project.delete_project(db, item_id)
