@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net">
+  <diagram name="ClassDiagram">
+    <root>
+      <mxCell id="0"/>
+      <mxCell id="1" parent="0"/>
+      <mxCell id="class_0" value="&lt;&lt;User&gt;&gt;
+id: int
+name: str
+email: str
+hashed_password: str" style="shape=swimlane;swimlaneLine=0;collapsible=0;html=1;rounded=1;" vertex="1" parent="1">
+        <mxGeometry x="40" y="40" width="240" height="140" as_="geometry"/>
+      </mxCell>
+      <mxCell id="class_1" value="&lt;&lt;BlogPost&gt;&gt;
+id: int
+title: str
+content: str
+author_id: int
+created_at: datetime" style="shape=swimlane;swimlaneLine=0;collapsible=0;html=1;rounded=1;" vertex="1" parent="1">
+        <mxGeometry x="40" y="240" width="240" height="140" as_="geometry"/>
+      </mxCell>
+      <mxCell id="class_2" value="&lt;&lt;Comment&gt;&gt;
+id: int
+content: str
+author_id: int
+blog_post_id: int
+created_at: datetime" style="shape=swimlane;swimlaneLine=0;collapsible=0;html=1;rounded=1;" vertex="1" parent="1">
+        <mxGeometry x="40" y="440" width="240" height="140" as_="geometry"/>
+      </mxCell>
+      <mxCell id="class_3" value="&lt;&lt;Project&gt;&gt;
+id: int
+name: str
+description: str
+start_date: date
+end_date: date" style="shape=swimlane;swimlaneLine=0;collapsible=0;html=1;rounded=1;" vertex="1" parent="1">
+        <mxGeometry x="40" y="640" width="240" height="140" as_="geometry"/>
+      </mxCell>
+      <mxCell id="class_4" value="&lt;&lt;TravelTrip&gt;&gt;
+id: int
+destination: str
+start_date: date
+end_date: date
+user_id: int" style="shape=swimlane;swimlaneLine=0;collapsible=0;html=1;rounded=1;" vertex="1" parent="1">
+        <mxGeometry x="320" y="40" width="240" height="140" as_="geometry"/>
+      </mxCell>
+      <mxCell id="class_5" value="&lt;&lt;CatPhoto&gt;&gt;
+id: int
+image_url: str
+caption: str
+uploaded_by: int" style="shape=swimlane;swimlaneLine=0;collapsible=0;html=1;rounded=1;" vertex="1" parent="1">
+        <mxGeometry x="320" y="240" width="240" height="140" as_="geometry"/>
+      </mxCell>
+    </root>
+  </diagram>
+</mxfile>
