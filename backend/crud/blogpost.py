@@ -1,4 +1,5 @@
-from sqlmodel import Session, select
+from sqlalchemy.orm import Session
+from sqlalchemy import select
 from models.blogpost import BlogPost
 from database import get_db
 from fastapi import Depends, HTTPException

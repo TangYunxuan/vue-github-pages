@@ -1,17 +1,30 @@
-from pydantic import BaseModel
+# backend/schemas/traveltrip.py
 from typing import Optional
+from pydantic import BaseModel
+from datetime import date
 
-class TraveltripBase(BaseModel):
+class TravelTripBase(BaseModel):
+    title: str
+    start_date: Optional[date] = None
+    end_date: Optional[date] = None
     location: Optional[str] = None
-    description: Optional[str] = None
-    photo_url: Optional[str] = None
-    date: Optional[str] = None
+    notes: Optional[str] = None
 
-class TraveltripCreate(TraveltripBase):
+class TravelTripCreate(TravelTripBase):
+    """用于创建"""
     pass
 
-class TraveltripOut(TraveltripBase):
-    id: int
+class TravelTripUpdate(BaseModel):
+    """用于更新（全部可选）"""
+    title: Optional[str] = None
+    start_date: Optional[date] = None
+    end_date: Optional[date] = None
+    location: Optional[str] = None
+    notes: Optional[str] = None
 
+class TravelTripOut(TravelTripBase):
+    id: int
+    
     class Config:
         orm_mode = True
+        from_attributes = True

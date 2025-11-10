@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { Motion } from '@vueuse/motion'
+import{ useMotion } from '@vueuse/motion'
 import { Send, MessageCircle } from 'lucide-vue-next'
 import { format } from 'date-fns'
 

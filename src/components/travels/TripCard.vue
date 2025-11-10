@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { Motion } from '@vueuse/motion'
+import { useMotion } from '@vueuse/motion'
 import { MapPin, Calendar, Camera } from 'lucide-vue-next'
 import { format } from 'date-fns'
 

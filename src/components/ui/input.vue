@@ -1,41 +1,23 @@
+<script setup>
+const props = defineProps({
+  modelValue: [String, Number],
+  placeholder: String,
+  type: { type: String, default: 'text' },
+  disabled: { type: Boolean, default: false }
+})
+const emit = defineEmits(['update:modelValue'])
+</script>
+
 <template>
   <input
     :type="type"
-    :placeholder="placeholder"
     :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
-    class="input"
+    :placeholder="placeholder"
+    :disabled="disabled"
+    @input="emit('update:modelValue', $event.target.value)"
+    class="block w-full rounded-xl border border-stone-300 bg-white text-stone-800
+           placeholder-stone-400 px-4 py-2 transition
+           focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500
+           disabled:opacity-50 disabled:cursor-not-allowed"
   />
 </template>
-
-<script setup>
-defineProps({
-  modelValue: String,
-  placeholder: {
-    type: String,
-    default: '',
-  },
-  type: {
-    type: String,
-    default: 'text',
-  },
-})
-defineEmits(['update:modelValue'])
-</script>
-
-<style scoped>
-.input {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  width: 100%;
-  box-sizing: border-box;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.input:focus {
-  border-color: #0077ff;
-}
-</style>

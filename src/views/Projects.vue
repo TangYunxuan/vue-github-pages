@@ -95,12 +95,12 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import Project from '@/Entities/Project'
-import User from '@/Entities/User'
+import Project from '@/Entities/Project.json'
+import User from '@/Entities/User.js'
 import ProjectCard from '@/components/projects/ProjectCard.vue';
 import ProjectDetail from '@/components/projects/ProjectDetail.vue';
 import StatCard from '@/components/projects/StatCard.vue';
-import { Button } from '@/components/ui/button';
+import  Button  from '@/components/ui/button.vue';
 import { LogIn } from 'lucide-vue-next';
 
 const projects = ref([]);

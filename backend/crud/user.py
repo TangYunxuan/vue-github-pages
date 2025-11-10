@@ -1,6 +1,6 @@
 from models.user import User
 from sqlalchemy.orm import Session
-from schemas import userCreate, userUpdate
+from schemas.user import UserCreate, UserUpdate, UserOut
 
 def list_users(db: Session):
     return db.query(User).all()
@@ -8,14 +8,14 @@ def list_users(db: Session):
 def get_user(db: Session, item_id: int):
     return db.query(User).filter(User.id == item_id).first()
 
-def create_user(db: Session, item: userCreate):
+def create_user(db: Session, item: UserCreate):
     db_item = User(**item.dict())
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
     return db_item
 
-def update_user(db: Session, item_id: int, item: userUpdate):
+def update_user(db: Session, item_id: int, item: UserUpdate):
     db_item = db.query(User).filter(User.id == item_id).first()
     if db_item:
         db_item.username = item.username

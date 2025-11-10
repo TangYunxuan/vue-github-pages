@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { Motion } from '@vueuse/motion'
+import { useMotion } from '@vueuse/motion'
 import {
   Calendar,
   Github,

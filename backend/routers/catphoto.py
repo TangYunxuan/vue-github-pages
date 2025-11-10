@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from crud import catphoto
-from schemas import CatphotoCreate, CatphotoUpdate
+from schemas.catphoto import CatPhotoCreate, CatPhotoUpdate
 from database import get_db
 
 router = APIRouter(prefix="/api/catphotos", tags=["Catphotos"])
@@ -17,11 +17,11 @@ def get_one(item_id: int, db: Session = Depends(get_db)):
     return result
 
 @router.post("/")
-def create(item: CatphotoCreate, db: Session = Depends(get_db)):
+def create(item: CatPhotoCreate, db: Session = Depends(get_db)):
     return catphoto.create_catphoto(db, item)
 
 @router.put("/{item_id}")
-def update(item_id: int, item: CatphotoUpdate, db: Session = Depends(get_db)):
+def update(item_id: int, item: CatPhotoUpdate, db: Session = Depends(get_db)):
     return catphoto.update_catphoto(db, item_id, item)
 
 @router.delete("/{item_id}")

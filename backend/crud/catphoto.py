@@ -1,6 +1,6 @@
 from models.catphoto import Catphoto
 from sqlalchemy.orm import Session
-from schemas import catphotoCreate, catphotoUpdate
+from schemas.catphoto import CatPhotoCreate, CatPhotoUpdate
 
 def list_catphotos(db: Session):
     return db.query(Catphoto).all()
@@ -8,14 +8,14 @@ def list_catphotos(db: Session):
 def get_catphoto(db: Session, item_id: int):
     return db.query(Catphoto).filter(Catphoto.id == item_id).first()
 
-def create_catphoto(db: Session, item: catphotoCreate):
+def create_catphoto(db: Session, item: CatPhotoCreate):
     db_item = Catphoto(**item.dict())
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
     return db_item
 
-def update_catphoto(db: Session, item_id: int, item: catphotoUpdate):
+def update_catphoto(db: Session, item_id: int, item: CatPhotoUpdate):
     db_item = db.query(Catphoto).filter(Catphoto.id == item_id).first()
     if db_item:
         db_item.caption = item.caption

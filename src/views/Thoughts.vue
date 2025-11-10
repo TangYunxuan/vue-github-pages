@@ -3,7 +3,7 @@
 import { ref, computed, onMounted, watch } from 'vue';
 
 //引入BlogPost实体类，用于获取博客文章数据
-import { BlogPost } from '@/entities/BlogPost';
+import  BlogPost  from '@/entities/BlogPost.json';
 
 //引入页面中的两个子组件：博客卡片和详情弹窗
 import BlogCard from '@/components/thoughts/BlogCard.vue';

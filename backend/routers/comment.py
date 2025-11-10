@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from crud import comment
-from schemas import CommentCreate, CommentUpdate
+
 from database import get_db
+from crud import comment as crud
+from schemas.comment import CommentCreate, CommentUpdate, CommentOut
 
 router = APIRouter(prefix="/api/comments", tags=["Comments"])
 

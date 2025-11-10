@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from crud import traveltrip
-from schemas import TraveltripCreate, TraveltripUpdate
-from database import get_db
 
-router = APIRouter(prefix="/api/traveltrips", tags=["Traveltrips"])
+from database import get_db
+from crud import traveltrip as crud
+from schemas.traveltrip import TravelTripCreate, TravelTripUpdate, TravelTripOut
+
+router = APIRouter(prefix="/api/traveltrips", tags=["TravelTrips"])
 
 @router.get("/")
 def get_all(db: Session = Depends(get_db)):
@@ -17,11 +18,11 @@ def get_one(item_id: int, db: Session = Depends(get_db)):
     return result
 
 @router.post("/")
-def create(item: TraveltripCreate, db: Session = Depends(get_db)):
+def create(item: TravelTripCreate, db: Session = Depends(get_db)):
     return traveltrip.create_traveltrip(db, item)
 
 @router.put("/{item_id}")
-def update(item_id: int, item: TraveltripUpdate, db: Session = Depends(get_db)):
+def update(item_id: int, item: TravelTripUpdate, db: Session = Depends(get_db)):
     return traveltrip.update_traveltrip(db, item_id, item)
 
 @router.delete("/{item_id}")

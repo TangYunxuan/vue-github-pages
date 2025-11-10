@@ -71,7 +71,7 @@
 import { computed } from 'vue'
 import { format } from 'date-fns'
 import { Calendar as CalendarIcon, Tag as TagIcon, Clock as ClockIcon } from 'lucide-vue-next'
-import { Badge } from '@/components/ui/badge'
+import  Badge  from '@/components/ui/badge.vue'
 import { useMotion } from '@vueuse/motion'
 
 const props = defineProps({

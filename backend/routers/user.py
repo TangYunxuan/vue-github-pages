@@ -1,8 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from crud import user
-from schemas import UserCreate, UserUpdate
+
 from database import get_db
+
+from crud import user as crud
+from schemas.user import UserCreate, UserUpdate, UserOut
 
 router = APIRouter(prefix="/api/users", tags=["Users"])
 

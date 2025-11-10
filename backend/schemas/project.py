@@ -10,6 +10,13 @@ class ProjectBase(BaseModel):
 class ProjectCreate(ProjectBase):
     pass
 
+class ProjectUpdate(BaseModel):
+    """PUT/PATCH /projects/{id} 用"""
+    name: Optional[str] = None
+    description: Optional[str] = None
+    link: Optional[str] = None
+    tech_stack: Optional[str] = None
+
 class ProjectOut(ProjectBase):
     id: int
 
